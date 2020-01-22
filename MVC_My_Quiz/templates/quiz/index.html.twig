@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello QuizController!{% endblock %}
+
+{% block body %}
+<section class="articles">
+    <article>
+        <h2>Quiz</h2>
+         <!-- Main page -->
+        <div class="main">
+            <!-- Number of Question  -->
+
+            <!-- Quiz Question -->
+            <div class="quiz-questions" id="display-area">
+                {% for question in question %}
+                    <div>{{ question.question }}</div>
+                {% endfor %}
+                <p id="answer">
+                {% if (question_id.id % 10) == 0 %}
+                    <h4>Fin du questionnaire</h4>
+                    <form action="" method="POST">
+                    {% if var == 0 %}
+                        {% for reponse in reponse %}
+                            {# <div class="reponse" style="text-decoration: none;"> {{ reponse.reponse}}</div> #}
+                            <input type="radio" class="radio" name="reponse_vali" value="{{ reponse.reponse}}">
+                            <div class="reponse">{{reponse.reponse}} </div>
+                            </br>
+                        {% endfor %}
+                            <button type="submit" style="dispay: block;">
+                                Validate
+                            </button>
+                    {% elseif var == 1 %}
+                        <div class="reponse_G">{{ bonRep }}</div>
+                    {% elseif var == 2 %}
+                        <div class="reponse_F">{{choix_user}} </div>
+                    {% endif %}
+                </form>
+                {% else %}
+                <div class="wrapper" id="pages">
+                    <span id="quizNumber">{{ question_id.id % 10 }}</span><span>/10</span>
+                </div>
+                    {# premier formulaire #}
+                <form action="" method="POST">
+                    {% if var == 0 %}
+                        {% for reponse in reponse %}
+                            {# <div class="reponse" style="text-decoration: none;"> {{ reponse.reponse}}</div> #}
+                            <input type="radio" class="radio" name="reponse_vali" value="{{ reponse.reponse}}">
+                            <div class="reponse">{{reponse.reponse}} </div>
+                            </br>
+                        {% endfor %}
+                            <button type="submit" style="dispay: block;" name="i">
+                                Validate
+                            </button>
+                    {% elseif var == 1 %}
+                            <h4>Bien joué</h4>
+                            {# <h4>{{ (question_id.id + 1) }}</h4> #}
+                            <div class="reponse_G">{{ bonRep }}</div>
+                            <a href="/quiz/{{ categorie_id.id }}/{{ (question_id.id + 1) }}"><div id="button">NEXT</div></a>
+                    {% elseif var == 2 %}
+                            <h4>Mauvaise réponse</h4>
+                            {# <div class="reponse" style="text-decoration: none;"> {{ reponse.reponse}}</div> #}
+                            {# <input type="radio" class="radio" name="reponse_vali" value="{{ reponse.reponse}}"> #}
+                            <div class="reponse_F">{{choix_user}} </div>
+                            <a href="/quiz/{{ categorie_id.id }}/{{ (question_id.id + 1) }}"><div id="button">NEXT</div></a>
+                    {% endif %}
+                </form>
+                {% endif %}
+                </p>
+            </div>
+            </br>
+        </div>
+
+        <canvas id="canvas"></canvas>
+    </article>
+</section>
+{% endblock %}

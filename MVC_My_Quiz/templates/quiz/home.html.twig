@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+{% block body%}
+    <h1>Bienvenue sur ce Quiz</h1>
+    <div class="align">
+        <div class="main">
+        {% for categorie in categorie %}
+                <a href="/quiz/{{categorie.id}}/{{(categorie.id - 1)*10+1}}"><div class="reponse">{{categorie.name}}</div></a>
+            </br>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
